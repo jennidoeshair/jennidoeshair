@@ -87,16 +87,9 @@ body {
   }
 }
 
-/**
- * h1, h2
- *
- * 1. This is a bit of a hack to keep the page from hiding under the
- *    fixed menu at the top of each page.
- */
 h1,
 h2 {
   font-family: 'BPreplay', sans-serif;
-  padding-top: 3rem; /* 1 */
   text-align: center;
 }
 
@@ -194,22 +187,14 @@ h1 {
    Booking Page
    ================================================================== */
 
-/**
- * iframe
- *
- * 1. Use a negative margin on bottom to keep iframe from causing
- *    parent to scroll (prevent double scrollbars).
- * 2. This is a bit of a hack to keep the page from hiding under the
- *    fixed menu at the top of each page.
- */
 iframe {
   background: white;
   border: none;
+  display: flex;
   height: 100%;
-  margin-bottom: -0.5rem; /* 1 */
   overflow: auto;
-  padding-top: 2.5rem; /* 2 */
   width: 100%;
+  -webkit-overflow-scrolling: touch;
 }
 
 /* ==================================================================
@@ -367,18 +352,6 @@ iframe {
   text-decoration: none;
 }
 
-/* Fixed position "Menu" link
-   -------------------------------------------- */
-
-.icon-link-fixed {
-  background: white;
-  box-shadow: 0 0.1rem rgba(0, 0, 0, 0.1);
-  left: 0;
-  position: fixed;
-  top: 0;
-  width: 100%;
-}
-
 /* Avatar
    -------------------------------------------- */
 
@@ -420,6 +393,12 @@ iframe {
 
 .icon-link-large > svg {
   width: 1.6rem;
+}
+
+.icon-link-menu {
+  position: fixed;
+  top: 0;
+  z-index: 1;
 }
 
 /* ==================================================================

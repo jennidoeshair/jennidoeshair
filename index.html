@@ -13,6 +13,13 @@
   </head>
 
   <body>
+    <a class="icon-link icon-link-large icon-link-menu" href="#menu">
+      <svg viewBox="0 0 32 32" aria-hidden="true">
+        <path d="M4 8 L28 8 M4 16 L28 16 M4 24 L28 24"></path>
+      </svg>
+      menu
+    </a>
+
     <div id="contact" class="page">
       <div class="contact">
         <header class="title">
@@ -207,15 +214,6 @@
       <nav class="menu">
         <ul class="nav">
           <li>
-            <a id="menulink" class="icon-link icon-link-fixed icon-link-large" href="#menu">
-              <svg viewBox="0 0 32 32" aria-hidden="true">
-                <path d="M4 8 L28 8 M4 16 L28 16 M4 24 L28 24"></path>
-              </svg>
-              menu
-            </a>
-          </li>
-
-          <li>
             <a href="/">
               <img class="avatar-small" src="profile.jpg" role="presentation">
               <p class="avatar-caption">jenni does hair</p>
@@ -240,11 +238,5 @@
         </ul>
       </nav>
     </div>
-    <script>
-      window.addEventListener("scroll", () => {
-        menulink.style.display =
-          /#menu$/.test(window.location.href) ? "none" : "flex";
-      });
-    </script>
   </body>
 </html>
