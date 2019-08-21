@@ -50,38 +50,42 @@
  *
  * 1. Full page background image (set off-center on x-axis).
  * 2. These properties are needed for full page background images on
- *    some devices. Also used in conjunction with the `.page` class to
- *    create virtual pages in a single page site.
- * 3. Animate scroll between sections of site.
+ *    some devices. Also these are needed for handling overflow
+ *    properly for the `body` on ios.
  */
 html {
   background: url(img0.jpg) no-repeat center left 60% fixed; /* 1 */
   background-size: cover; /* 1 */
   height: 100%; /* 2 */
   overflow: hidden; /* 2 */
-  scroll-behavior: smooth; /* 3 */
-}
-
-/* Allow users to disable scroll animation at OS level. */
-@media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
+  position: relative; /* 2 */
 }
 
 /**
  * body
  *
  * 1. Remove page margins.
+ * 2. Used in conjunction with the `page` class to create virtual pages
+ *    in a single page site.
+ * 3. Animate scroll between sections of site.
  */
 body {
   font-family: 'Comic Neue', sans-serif;
   font-size: 1.2rem;
-  height: 100%; /* 1 */
+  height: 100%; /* 2 */
   line-height: 1.35;
   margin: 0; /* 1 */
+  overflow: hidden; /* 2 */
+  position: relative; /* 2 */
+  scroll-behavior: smooth; /* 3 */
 }
 
+/* Allow users to disable scroll animation at OS level. */
+@media (prefers-reduced-motion: reduce) {
+  body {
+    scroll-behavior: auto;
+  }
+}
 
 /**
  * h1, h2
@@ -105,13 +109,18 @@ a:visited {
    Page and Content Wrappers
    ================================================================== */
 
-/* Create virtual pages. */
+/**
+ * page - Create virtual pages.
+ *
+ * 1. This is required to enable page scrolling on ios.
+ */
 .page {
   height: 100%;
   overflow: auto;
+  -webkit-overflow-scrolling: touch; /* 1 */
 }
 
-/* For screenreader view only. */
+/** screenreader - For screenreader view only. */
 .screenreader {
   left: -9999px;
   position: absolute;
@@ -198,6 +207,7 @@ iframe {
   border: none;
   height: 100%;
   margin-bottom: -0.5rem; /* 1 */
+  overflow: auto;
   padding-top: 2.5rem; /* 2 */
   width: 100%;
 }
