@@ -1,0 +1,15 @@
+{
+  "name": "Jenni Does Hair",
+  "short_name": "Jenni Does Hair",
+  "description": "Book your next hair appointment today!",
+  "start_url": ".",
+  "background_color": "#ffffff",
+  "theme_color": "#ffffff",
+  "icons": [
+    {
+      "src": "icon.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    }
+  ]
+}
