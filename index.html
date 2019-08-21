@@ -240,11 +240,11 @@
         </ul>
       </nav>
     </div>
+    <script>
+      window.addEventListener("scroll", () => {
+        menulink.style.display =
+          /#menu$/.test(window.location.href) ? "none" : "flex";
+      });
+    </script>
   </body>
-  <script>
-    window.addEventListener("scroll", () => {
-      menulink.style.display =
-        /#menu$/.test(window.location.href) ? "none" : "flex";
-    });
-  </script>
 </html>
