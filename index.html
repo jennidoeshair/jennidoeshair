@@ -13,11 +13,11 @@
   </head>
 
   <body>
-    <a class="icon-link icon-link-large icon-link-menu" href="#menu">
-      <svg viewBox="0 0 32 32" aria-hidden="true">
+    <a id="menubtn" class="menu-button rainbow" href="#menu">
+      <svg viewBox="0 0 32 32">
+        <title>menu</title>
         <path d="M4 8 L28 8 M4 16 L28 16 M4 24 L28 24"></path>
       </svg>
-      menu
     </a>
 
     <div id="contact" class="page">
@@ -152,7 +152,7 @@
             </footer>
           </blockquote>
 
-          <a class="button button-b" href="#booking">book now!</a>
+          <a class="button button-b rainbow" href="#booking">book now!</a>
           <img class="portfolio-image" src="img2.jpg" alt="A woman’s headshot with a Silver Balayage to showcase Jenni’s work.">
           <img class="portfolio-image" src="img1.jpg" alt="Another photo of Jenni’s work with a woman with Vivid Color in a fire-like gradient.">
         </div>
@@ -200,11 +200,11 @@
             from Traverse City, but fell in love with Marquette when visiting
             one summer. My free time is filled with hiking, mountain biking,
             swimming and watching my favorite shows with my boyfriend and
-            <a href="https://www.instagram.com/punky_and_the_marz/"> two fur
-            babies</a>. I also enjoy attending hair shows, such as the Redken
-            Symposium in Las Vegas. I absolutely love what I do! Hair styling
-            is art, so <a href="#booking">book an appointment today</a> and
-            let your hair be my canvas!
+            <a class="rainbow" href="https://www.instagram.com/punky_and_the_marz/">
+            two fur babies</a>. I also enjoy attending hair shows, such as the
+            Redken Symposium in Las Vegas. I absolutely love what I do! Hair
+            styling is art, so <a class="rainbow" href="#booking">book an
+            appointment today</a> and let your hair be my canvas!
           </p>
         </div>
       </div>
@@ -238,5 +238,14 @@
         </ul>
       </nav>
     </div>
+    <script>
+      menubtn.addEventListener("click", () => {
+        menubtn.style.display = "none";
+      }, false);
+
+      for (let li of document.querySelectorAll(".nav-item")) {
+        li.addEventListener("click", () => menubtn.style.display = "flex");
+      }
+    </script>
   </body>
 </html>

@@ -4,7 +4,7 @@
 
 /**
  * These fonts were downloaded from <https://brick.im> and then
- * base64'd for inline use here.
+ * base64 encoded for inline use.
  */
 
 @font-face {
@@ -29,10 +29,24 @@
    Animations
    ================================================================== */
 
-@keyframes gradient {
+@keyframes rainbow {
   0% { background-position: 0 }
   50% { background-position: 100% }
   100% { background-position: 0 }
+}
+
+.rainbow:hover {
+  animation: rainbow 7s linear infinite;
+  background: linear-gradient(
+    90deg,
+    hsl(59, 92%, 66%) 0%,
+    hsl(131, 92%, 66%) 30%,
+    hsl(203, 92%, 66%) 55%,
+    hsl(275, 92%, 66%) 85%,
+    hsl(347, 92%, 66%) 100%
+  );
+  background-size: 1000% 100%;
+  text-decoration: none;
 }
 
 /* ==================================================================
@@ -50,24 +64,28 @@
  *
  * 1. Full page background image (set off-center on x-axis).
  * 2. These properties are needed for full page background images on
- *    some devices. Also these are needed for handling overflow
- *    properly for the `body` on ios.
+ *    some devices. Also these are needed for handling `overflow:
+ *    hidden` properly for the `body` on ios.
+ * 3. This may be required for handling `overflow: hidden` properly
+ *    for the `body` on ios 9 (untested).
  */
 html {
   background: url(img0.jpg) no-repeat center left 60% fixed; /* 1 */
   background-size: cover; /* 1 */
   height: 100%; /* 2 */
   overflow: hidden; /* 2 */
-  position: relative; /* 2 */
+  position: relative; /* 3 */
 }
 
 /**
  * body
  *
  * 1. Remove page margins.
- * 2. Used in conjunction with the `page` class to create virtual pages
- *    in a single page site.
- * 3. Animate scroll between sections of site.
+ * 2. Used in conjunction with the `html` element and `page` class to
+ *    create virtual pages in a single page site.
+ * 3. This may be required for handling `overflow: hidden` properly on
+ *    ios 9 (untested).
+ * 4. Animate scroll between sections of site.
  */
 body {
   font-family: 'Comic Neue', sans-serif;
@@ -76,8 +94,8 @@ body {
   line-height: 1.35;
   margin: 0; /* 1 */
   overflow: hidden; /* 2 */
-  position: relative; /* 2 */
-  scroll-behavior: smooth; /* 3 */
+  position: relative; /* 3 */
+  scroll-behavior: smooth; /* 4 */
 }
 
 /* Allow users to disable scroll animation at OS level. */
@@ -87,9 +105,16 @@ body {
   }
 }
 
+/**
+ * h1, h2
+ *
+ * 1. Hack to keep page headings from being so touchy with the absolute
+ *    positioned menu link.
+ */
 h1,
 h2 {
   font-family: 'BPreplay', sans-serif;
+  padding-top: 1.2rem; /* 1 */
   text-align: center;
 }
 
@@ -113,7 +138,9 @@ a:visited {
   -webkit-overflow-scrolling: touch; /* 1 */
 }
 
-/** screenreader - For screenreader view only. */
+/**
+ * screenreader - For screenreader view only.
+ */
 .screenreader {
   left: -9999px;
   position: absolute;
@@ -137,7 +164,7 @@ a:visited {
 }
 
 /* Don't fill entire width if screen is wide enough. */
-@media screen and (min-width: 550px) {
+@media screen and (min-width: 34.3rem) {
   .contact {
     min-width: auto;
     width: 42%;
@@ -187,14 +214,19 @@ h1 {
    Booking Page
    ================================================================== */
 
+/**
+ * iframe - for Square Appointments
+ *
+ * 1. Make the iframe fill the screen.
+ * 2. Enable scrolling within the iframe.
+ */
 iframe {
-  background: white;
-  border: none;
-  display: flex;
-  height: 100%;
-  overflow: auto;
-  width: 100%;
-  -webkit-overflow-scrolling: touch;
+  border: none; /* 1 */
+  display: flex; /* 1 */
+  height: 100%; /* 1 */
+  overflow: auto; /* 2 */
+  width: 100%; /* 1 */
+  -webkit-overflow-scrolling: touch; /* 2 */
 }
 
 /* ==================================================================
@@ -208,20 +240,32 @@ iframe {
   min-height: 100%;
 }
 
+/**
+ * testimonial-group
+ *
+ * 1. The max-width is set at twice the max-width of a testimial so
+ *    that wrapping will fit a max of two testimonials per line.
+ */
 .testimonial-group {
   align-items: start;
   background: white;
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: wrap; /* 1 */
   justify-content: center;
   margin: 0 auto;
-  max-width: 60rem;
+  max-width: 60rem; /* 1 */
   width: 100%;
 }
 
+/**
+ * testimial
+ *
+ * 1. The max-width is set at half the max-width of testimonial-group
+ *    so that up to two testimonials will fit in a row.
+ */
 .testimonial {
   margin: 0;
-  max-width: 30rem;
+  max-width: 30rem; /* 1 */
   padding: 1.5rem;
   text-align: center;
 }
@@ -234,7 +278,7 @@ iframe {
   font-size: 0.9rem;
 }
 
-/* Use this class to force a testimonial to have its own row. */
+/* Use to force a testimonial to have its own row. */
 .testimonial-alone {
   margin: 0 1rem;
 }
@@ -242,15 +286,10 @@ iframe {
 /* Portfolio images
    -------------------------------------------- */
 
-/**
- * portfolio-image
- *
- * 1. Don't let flex stretch the image.
- */
 .portfolio-image {
   max-width: 30rem;
-  width: 100%;
   padding: 0.2rem;
+  width: 100%;
 }
 
 /* ==================================================================
@@ -278,21 +317,6 @@ iframe {
   padding: 0.2rem;
 }
 
-/* Animated background gradient on link hover. */
-.about-text > a:hover {
-  animation: gradient 7s linear infinite;
-  background: linear-gradient(
-    90deg,
-    hsl(59, 92%, 66%) 0%,
-    hsl(131, 92%, 66%) 30%,
-    hsl(203, 92%, 66%) 55%,
-    hsl(275, 92%, 66%) 85%,
-    hsl(347, 92%, 66%) 100%
-  );
-  background-size: 900%;
-  text-decoration: none;
-}
-
 /* Avatar
    -------------------------------------------- */
 
@@ -300,12 +324,12 @@ iframe {
   border-radius: 0.5rem;
   display: block;
   margin: 0 auto;
-  max-width: 200px;
+  max-width: 10rem;
   width: 100%;
 }
 
 /* Only wrap text around avatar if screen is wide enough. */
-@media screen and (min-width: 335px) {
+@media screen and (min-width: 18.4rem) {
   .avatar {
     border-radius: 50%;
     float: left;
@@ -329,7 +353,7 @@ iframe {
   text-align: center;
 }
 
-/* Hide unordered list item bullets */
+/* Hide unordered list item bullets. */
 .nav {
   list-style-type: none;
   padding: 0;
@@ -358,7 +382,7 @@ iframe {
 .avatar-small {
   border-radius: 50%;
   filter: grayscale(1);
-  max-width: 100px;
+  max-width: 5rem;
 }
 
 .avatar-caption {
@@ -382,8 +406,8 @@ iframe {
 .icon-link > svg {
   fill: none;
   margin-right: 0.4rem;
-  stroke-width: 2px;
   stroke: currentColor;
+  stroke-width: 0.1rem;
   width: 1.2rem;
 }
 
@@ -393,12 +417,6 @@ iframe {
 
 .icon-link-large > svg {
   width: 1.6rem;
-}
-
-.icon-link-menu {
-  position: fixed;
-  top: 0;
-  z-index: 1;
 }
 
 /* ==================================================================
@@ -438,20 +456,24 @@ iframe {
    -------------------------------------------- */
 
 .button-b {
-  border: 1px solid black;
+  border: 0.1rem solid black;
   max-width: 29rem;
   width: 100%;
 }
 
-.button-b:hover {
-  animation: gradient 7s linear infinite;
-  background: linear-gradient(
-    90deg,
-    hsl(59, 92%, 66%) 0%,
-    hsl(131, 92%, 66%) 30%,
-    hsl(203, 92%, 66%) 55%,
-    hsl(275, 92%, 66%) 85%,
-    hsl(347, 92%, 66%) 100%
-  );
-  background-size: 1000% 100%;
+/* Menu Button
+   -------------------------------------------- */
+
+.menu-button {
+  background: white;
+  border-radius: 50%;
+  display: flex;
+  left: 0.3rem;
+  padding: 0.3rem;
+  position: fixed;
+  stroke: currentColor;
+  stroke-width: 0.2rem;
+  top: 0.3rem;
+  width: 2.5rem;
+  z-index: 1;
 }
