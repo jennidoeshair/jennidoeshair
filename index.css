@@ -465,15 +465,19 @@ iframe {
    -------------------------------------------- */
 
 .menu-button {
+  align-items: center;
   background: white;
   border-radius: 50%;
   display: flex;
   left: 0.3rem;
   padding: 0.3rem;
   position: fixed;
-  stroke: currentColor;
+  stroke: black;
   stroke-width: 0.2rem;
   top: 0.3rem;
-  width: 2.5rem;
   z-index: 1;
+}
+
+.menu-button > svg {
+  width: 2rem;
 }
